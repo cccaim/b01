@@ -14,9 +14,11 @@ import org.zerock.b01.repository.BoardRepository;
 @RequiredArgsConstructor
 @Transactional
 public class BoardServiceImpl implements BoardService {
+  // 롬북의 require 생성자 사용해서 생성사 주입
   private final ModelMapper modelMapper;
   private final BoardRepository boardRepository;
 
+  // 새 게시글등록 메서드 리턴(글번호)
   @Override
   public Long register(BoardDTO boardDTO){
     Board board = modelMapper.map(boardDTO, Board.class);
