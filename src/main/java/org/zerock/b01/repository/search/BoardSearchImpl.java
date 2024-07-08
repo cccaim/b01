@@ -31,6 +31,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
     this.getQuerydsl().applyPagination(pageable, query);
 
+
     List<Board> boards = query.fetch();
     // 검색 결과 갯수
     long count = query.fetchCount();
