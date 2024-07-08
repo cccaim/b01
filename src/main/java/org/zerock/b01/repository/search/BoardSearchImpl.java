@@ -39,7 +39,8 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     return  null;
   }
 
-  @Override Page<Board> searchAll(String[] types, String keyword, Pageable pageable){
+  @Override
+  public Page<Board> searchAll(String[] types, String keyword, Pageable pageable){
     QBoard board = QBoard.board;
     JPQLQuery<Board> query = from(board);
 
