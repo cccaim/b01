@@ -16,16 +16,17 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
   @Override
   public Page<Board> search1(Pageable pageable) {
+    // QueryDSL 객체를 사용
     QBoard board = QBoard.board;
-
+    // board 테이블 사용
     JPQLQuery<Board> query = from(board);
-
+    //where 절
     query.where(board.title.contains("1"));
 
     this.getQuerydsl().applyPagination(pageable, query);
 
     List<Board> boards = query.fetch();
-
+    // 검색 결과 갯수
     long count = query.fetchCount();
 
     return  null;
