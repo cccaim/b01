@@ -83,10 +83,20 @@ public class BoardRepositoryTests {
 
     @Test
     public void testSearch1(){
+
+        String[] types = {"t","c","w"};
+
+        String keyword = "1";
+
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+        //검색어로 검색조건(제목,내용,글쓴이)에 맞게 페이지 검색
+        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
 
-
-        boardRepository.search1(pageable);
+        //결과 확인
+        log.info(result.getTotalPages());//전체 페이지
+        log.info(result.getNumber());  //페이지번호
+        log.info(result.hasPrevious() + ": " + result.hasNext());
+        result.getContent().forEach(board -> log.info(board.toString()));
     }
 
 }
