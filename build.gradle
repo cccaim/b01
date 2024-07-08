@@ -46,7 +46,7 @@ tasks.named('test') {
 /**
  * QueryDSL Build Options
  */
-def querydslDir = "src/main/java"
+def querydslDir = "src/main/generated"
 
 sourceSets {
 	main.java.srcDirs += [ querydslDir ]
