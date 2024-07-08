@@ -20,12 +20,23 @@ public class BoardServiceTests {
     log.info(boardService.getClass().getName());
 
     BoardDTO boardDTO = BoardDTO.builder()
-            .title("Sample Title...")
-            .content("Sample Content...")
+            .title("샘플 타이틀...")
+            .content("샘플 내용...")
             .writer("user00")
             .build();
     Long bno = boardService.register(boardDTO);
 
     log.info("bno: " + bno);
+  }
+
+  @Test
+  public void testModify(){
+
+    BoardDTO boardDTO = BoardDTO.builder()
+            .bno(101L)
+            .title("Updated....101")
+            .content("Updated content 101...")
+            .build();
+    boardService.modify(boardDTO);
   }
 }
