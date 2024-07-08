@@ -1,5 +1,6 @@
 package org.zerock.b01.repository.search;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +21,13 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     QBoard board = QBoard.board;
     // board 테이블 사용
     JPQLQuery<Board> query = from(board);
+    BooleanBuilder booleanBuilder = new BooleanBuilder();
+    booleanBuilder.or(board.title.contains("11"));    //title like...
+    booleanBuilder.or(board.content.contains("11"));  //content like ...
+
     //where 절
-    query.where(board.title.contains("1"));
+    query.where(booleanBuilder);
+    query.where(board.bno.gt(0L));
 
     this.getQuerydsl().applyPagination(pageable, query);
 
