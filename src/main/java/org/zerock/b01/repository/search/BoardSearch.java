@@ -5,9 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.zerock.b01.domain.Board;
 
 public interface BoardSearch {
-  Page<Board> search1(Pageable pageable);
 
-  Page<Board> searchAll(String[] types,String keyword, Pageable pageable);
+    Page<Board> search1(Pageable pageable);
 
+    Page<Board> searchAll(String[] types, String keyword ,Pageable pageable);
 }
-

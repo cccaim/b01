@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.zerock.b01.domain.Board;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -19,7 +20,7 @@ public class BoardRepositoryTests {
     @Autowired
     private BoardRepository boardRepository;
 
-    @Test
+    //@Test
     public void testInsert() {
         for (int i = 1; i <= 100; i++) {
             Board board = Board.builder()
@@ -32,7 +33,7 @@ public class BoardRepositoryTests {
         }
     }
 
-    @Test
+    //@Test
     public void testSelect(){
         Long bno = 1L;
         //Optional 타입은 없을 경우 null 값 에러 방지를 위함
@@ -43,7 +44,7 @@ public class BoardRepositoryTests {
     }
 
     //update 기능 테스트
-    @Test
+    //@Test
     public void testUpdate(){
         Long bno = 100L;
         //Optional 타입은 없을 경우 null 값 에러 방지를 위함
@@ -55,24 +56,37 @@ public class BoardRepositoryTests {
         // 2. 같은 객체 입력시 수정된 내용이 업데이트 됨 (기준은 id 기준)
     }
 
-    @Test
+    //@Test
     public void testDelete(){
         long bno = 1L;
         boardRepository.deleteById(bno);
     }
 
-    @Test
-    public void testSearch1(){
-        // 2 page order by bno desc
-        Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
-        boardRepository.search1(pageable);
+    //게시판 페이징 테스트
+    //@Test
+    public void testPaging(){
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+        //페이지 객체를 findAll()에 입력하여 원하는 페이지의 데이터만 가져옴
+        Page<Board> result = boardRepository.findAll(pageable);
+        //페이지 리스트는 보드리스트와 여러 정보들이 담겨있음
+        log.info("총 갯수: " +result.getTotalElements());
+        log.info("총 페이지수: " + result.getTotalPages());
+        log.info("페이지 번호: " + result.getNumber());
+        log.info("페이지 사이즈: " + result.getSize());
+        // 보드 리스트 데이터
+        List<Board> boards = result.getContent();
+        for (Board board : boards) {
+            log.info(board.toString());
+        }
     }
 
     @Test
-    public void testSearchALL(){
-        String[] types = {"t","c","w"};
-        String keyword = "1";
-        Pageable pageable = PageRequest.of(1,10, Sort.by(types).descending());
-        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
+    public void testSearch1(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+
+        boardRepository.search1(pageable);
     }
+
 }
