@@ -22,6 +22,8 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
     query.where(board.title.contains("1"));
 
+    this.getQuerydsl().applyPagination(pageable, query);
+
     List<Board> boards = query.fetch();
 
     long count = query.fetchCount();
