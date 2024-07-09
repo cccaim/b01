@@ -18,7 +18,7 @@
                     <form action="/board/register" method="post">
                         <div class="input-group mb-3">
                             <span class="input-group-text">Title</span>
-                            <input type="text"  name="title" class="form-control" placeholder="Title">
+                            <input type="text" name="title" class="form-control" placeholder="Title">
                         </div>
 
                         <div class="input-group mb-3">
@@ -46,7 +46,17 @@
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log(errors)
 
+    let errorMsg = ''
+
+    if(errors){
+        for(let i = 0; i < errors.length; i++){
+            errorMsg += `${errors[i].field} 은(는) ${errors[i].defaultMessage} \n`
+        }
+        alert(errorMsg)
+    }
 </script>
 
 </html>
