@@ -124,8 +124,12 @@
         self.location='/board/list'
     },false)
 
+    const result = [[${result}]]
+    const modal = new bootstrap.Modal(document.querySelector(".modal"))
 
-
+    if(result){
+        modal.show()
+    }
 
     console.log("script............")
 </script>
