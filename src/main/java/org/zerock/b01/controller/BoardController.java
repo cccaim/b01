@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.b01.domain.Board;
 import org.zerock.b01.dto.BoardDTO;
 import org.zerock.b01.dto.PageRequestDTO;
 import org.zerock.b01.dto.PageResponseDTO;
@@ -50,5 +51,12 @@ public class BoardController {
     Long bno = boardService.register(boardDTO);
     redirectAttributes.addFlashAttribute("result",bno);
     return "redirect:/board/list";
+  }
+
+  @GetMapping("/read")
+  public void read(Long bno, PageRequestDTO pageRequestDTO, Model model) {
+    BoardDTO boardDTO = boardService.readOne(bno);
+    log.info(boardDTO);
+    model.addAttribute("boardDTO", boardDTO);
   }
 }
