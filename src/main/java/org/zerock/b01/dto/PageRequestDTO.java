@@ -30,7 +30,7 @@ public class PageRequestDTO {
     if(type == null || type.isEmpty()){
       return null;
     }
-    return type.split(",");
+    return type.split("");
   }
 
   public Pageable getPageable(String...props){
