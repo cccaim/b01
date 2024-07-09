@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @ToString
-public class PageResponseDTO {
+public class PageResponseDTO<E> {
 
   private int page;
   private int size;
